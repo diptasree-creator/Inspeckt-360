@@ -1,0 +1,75 @@
+# Render Blueprint — provisions the Postgres database AND the web service
+# together in one "New +" -> "Blueprint" deploy, instead of clicking
+# through the manual steps in DEPLOY.md by hand. Both routes end up in the
+# same place; this file exists for the one-click path.
+#
+# See DEPLOY.md's "Deploy with the Blueprint (render.yaml)" section for
+# what to fill in after this creates the two resources below, and why a
+# few values (CORS_ORIGINS, the Resend/Anthropic keys) are deliberately
+# left for you to enter by hand rather than defaulted here.
+databases:
+  - name: inspeckt-db
+    plan: free
+    databaseName: inspeckt
+    user: inspeckt_user
+
+services:
+  - type: web
+    name: inspeckt
+    runtime: docker
+    # Repo root as build context (Dockerfile needs to see both backend/
+    # and frontend/ — see backend/Dockerfile's own header comment).
+    dockerfilePath: backend/Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      # Turns on app/config.py's Settings.validate_for_production() — the
+      # app refuses to boot with an unsafe JWT secret, wildcard CORS, or a
+      # non-Postgres database once this is set. See backend/README.md's
+      # "Production configuration" section.
+      - key: ENVIRONMENT
+        value: production
+
+      # Render provisions this from the database above — no manual copy-
+      # pasting a connection string, and it stays in sync if the database
+      # is ever recreated.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: inspeckt-db
+          property: connectionString
+
+      # Render generates a real random secret the first time this
+      # deploys — never the checked-in dev value from backend/app/config.py.
+      - key: JWT_SECRET
+        generateValue: true
+
+      # No safe default exists for this one — it has to be YOUR frontend's
+      # real origin (or this same service's own onrender.com URL, if
+      # you're using the single-origin static-frontend mode described in
+      # DEPLOY.md). Render will prompt for a value when you apply this
+      # blueprint; the app deliberately refuses to start with the
+      # unset/"*" fallback in production (see backend/README.md).
+      - key: CORS_ORIGINS
+        sync: false
+
+      # Optional — leave EMAIL_PROVIDER unset (defaults to "console") to
+      # launch without real email first; the app warns at startup but
+      # still runs, logging magic-links and lead notifications instead of
+      # sending them. Set EMAIL_PROVIDER=resend plus the three keys below
+      # once you have a Resend account (see backend/README.md's "Email
+      # sending" section) to actually deliver them.
+      - key: EMAIL_PROVIDER
+        value: console
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        sync: false
+      - key: CONSULTANT_NOTIFY_EMAIL
+        sync: false
+
+      # Optional — unlocks POST /api/v1/label-checks/scan and
+      # POST /api/v1/lab-reports/extract (both otherwise return a clean
+      # 501). Get a key at console.anthropic.com.
+      - key: ANTHROPIC_API_KEY
+        sync: false

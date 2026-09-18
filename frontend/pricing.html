@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing — Inspeckt</title>
+<meta name="description" content="Inspeckt pricing: Starter, Mid, Higher, and Full Consultation tiers for FSSAI compliance checking, plus custom plans for co-packers and consultants." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥛</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topnav">
+  <div class="container topnav-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">In</span> Inspeckt</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#categories">Categories</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="index.html#why">Why Inspeckt</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm" href="login.html">Log in</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Get started</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section" style="padding-bottom: 0;">
+    <div class="container">
+      <div class="section-head" style="max-width: 720px;">
+        <span class="eyebrow">Pricing</span>
+        <h1 style="font-size: var(--text-3xl)">Priced per engagement, not per click</h1>
+        <!-- Fix per review item C3: was "...and up to 5 formulation
+             iterations are free for every account" — under the new shared
+             usage pool, a Formulation Lab iteration draws from the same
+             paid-tier allowance as a New Submission; there's no separate
+             free iteration baseline any more. -->
+        <p>A Regulatory Brief and a nutrition panel template preview are free for every account, for any category. Paying starts
+          when you save a full compliance check or a scored formulation iteration. License and registration application
+          charges are never included — those are handled directly by your consultant.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <!-- Fix per review item B5: paid status and every submission are
+           stored only in this browser's local storage today — no
+           account server yet. Warning made prominent and placed right
+           before the purchase buttons, not buried in the Privacy page,
+           since this is the moment it actually matters. -->
+      <div class="alert alert-warning" style="margin-bottom: var(--space-5)">
+        <strong>Before you purchase:</strong> this build keeps your paid status and submission history only in
+        this browser's local storage — there's no account server behind it yet. Clearing your browser's site
+        data, switching browsers, or moving to a new device loses your paid tier and everything you've saved.
+        If that's a risk for you, stay on the same browser/device, or <a href="consult.html?kind=custom_bundle">talk to us</a>
+        before paying.
+      </div>
+      <div class="pricing-grid" id="pricing-grid"><!-- populated by js/ui/pricing-page.js --></div>
+      <!-- Fix per review item C2: text filled in by js/ui/pricing-page.js from data/pricing.js's UNIT_NOTE -->
+      <p class="pricing-note muted" id="pricing-unit-note" style="font-size: var(--text-sm)"></p>
+      <p class="pricing-note">Need something between these, or volume across many brands? <a href="consult.html?kind=custom_bundle">Talk to us about a custom plan.</a></p>
+      <p class="pricing-note muted" style="font-size: var(--text-xs); margin-top: var(--space-2)">All prices are exclusive of GST.</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-surface); border-top: var(--border); border-bottom: var(--border);">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Free, always</span>
+        <h2>What doesn't cost anything</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card feature-card">
+          <div class="feature-icon" data-icon="clipboard"></div>
+          <h3>Regulatory Brief</h3>
+          <p>Every composition, labelling, and testing requirement for your product type — free with an account, shown before you enter a single number.</p>
+        </div>
+        <!-- Fix per review item C3: was "5 formulation iterations" —
+             saving a Formulation Lab iteration now draws from the same
+             paid-tier pool as a New Submission (see the shared "3/5/10"
+             allowance above), so it's no longer a free-tier perk. -->
+        <div class="card feature-card">
+          <div class="feature-icon" data-icon="layers"></div>
+          <h3>Every FSSAI category</h3>
+          <p>See what's live today and what's coming — free to browse, and you can ask to be notified the moment a new category launches.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="feature-icon" data-icon="tag"></div>
+          <h3>Nutrition panel template</h3>
+          <p>See the panel structure — serving size, RDA%, layout — for free. Real values only appear once a NABL lab report is uploaded; we never estimate them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="cta-band">
+      <h2>Not sure which tier fits?</h2>
+      <p>Tell us what you're working on and we'll recommend one — no obligation.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="consult.html?kind=custom_bundle">Talk to a consultant</a>
+        <a class="btn btn-secondary btn-lg" href="signup.html">Start free instead</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark">In</span> Inspeckt</a>
+        <p class="muted" style="margin-top:var(--space-3)">An FSSAI compliance platform built by Inspeckt Food
+          Solutions, Bengaluru.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html#categories">Categories</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="login.html">Log in</a>
+        <a href="signup.html">Sign up</a>
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      Prices exclude applicable taxes. Reports are an automated first-pass assessment, not a legal opinion or
+      an FSSAI approval — verify all limits against the current gazetted regulations.
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/ui/nav.js"></script>
+<script type="module" src="js/ui/pricing-page.js"></script>
+</body>
+</html>

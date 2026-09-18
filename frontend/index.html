@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inspeckt — FSSAI Compliance Platform</title>
+<meta name="description" content="Inspeckt checks your formulation, lab results and label against FSSAI regulations — composition, microbiology, labelling and claims — and routes anything it can't cover to a human consultant. Dairy is live today; more FSSAI categories are on the way." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥛</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topnav">
+  <div class="container topnav-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">In</span> Inspeckt</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#how-it-works">How it works</a>
+      <a href="#categories">Categories</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="#why">Why Inspeckt</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm" href="login.html">Log in</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Get started</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="eyebrow">FSSAI Compliance Platform</span>
+        <h1>Know what FSSAI compliance actually requires.</h1>
+        <p class="lead">Before a regulator, retailer, or auditor tells you. Inspeckt checks your formulation,
+          lab results and label against FSSAI regulations — composition, microbiology, labelling and claims —
+          and tells you exactly what's wrong, which regulation it breaks, and how to fix it. When something
+          doesn't fit an automated check, it routes straight to a human consultant instead of guessing.</p>
+        <!-- Fix per review item C14: "FSSAI Compliance Platform" implies
+             broader coverage than the product delivers — real FSSAI
+             compliance also covers facility/hygiene (Schedule 4 GMP) and
+             personnel (FoSTaC-trained Food Safety Supervisors), which
+             Inspeckt doesn't check. Scoping that here, pre-signup, rather
+             than only in copy a customer sees after paying. -->
+        <p class="muted" style="font-size: var(--text-sm)">Inspeckt checks your product — its composition, microbiology, and labelling. It doesn't cover facility/hygiene audits (Schedule 4 GMP) or personnel training records (FoSTaC) — those are separate FSSAI requirements you'll still need to handle directly.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="signup.html">Start a free check</a>
+          <a class="btn btn-secondary btn-lg" href="consult.html?kind=custom_bundle">Talk to a consultant</a>
+        </div>
+        <div class="hero-meta">
+          <!-- Per your "the homepage can't be just for Milk" note: leads
+               with the actual breadth built (20 dairy product types, not
+               one), instead of the "1/10" framing that read as "barely
+               anything is live" even though a whole category's worth of
+               standards is done. The 1/10 fact itself is still true and
+               still worth showing, so it moved to the third slot instead
+               of being dropped. -->
+          <div><div class="num" id="hero-stat-live-count">20</div><div class="lbl" id="hero-stat-live-label">Dairy product types live — milk to lactose &amp; permeate powder</div></div>
+          <div><div class="num">Free</div><div class="lbl">Regulatory Brief preview, every account</div></div>
+          <!-- Fix per your "48 hours needs to be removed": dropped the
+               report-turnaround-time stat entirely rather than reword it —
+               there's no live queue behind it in this build, so any number
+               here is a promise this product can't yet keep. -->
+          <div><div class="num">10</div><div class="lbl">FSSAI food groups on the roadmap — Dairy fully live today</div></div>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="card">
+          <div class="row-between" style="margin-bottom: var(--space-4)">
+            <strong>Buffalo Milk · Compliance Report</strong>
+            <span class="badge badge-warning">Warning</span>
+          </div>
+          <div class="mini-report-row"><span>Milk Fat</span><span style="color:var(--color-success-ink); font-weight:600">6.2% · Pass</span></div>
+          <div class="mini-report-row"><span>SNF</span><span style="color:var(--color-success-ink); font-weight:600">9.1% · Pass</span></div>
+          <div class="mini-report-row"><span>Aerobic Plate Count</span><span style="color:var(--color-warning-ink); font-weight:600">42,000 CFU/ml · Warning</span></div>
+          <div class="mini-report-row"><span>Salmonella</span><span style="color:var(--color-success-ink); font-weight:600">Absent · Pass</span></div>
+          <div class="mini-report-row"><span>Allergen declaration</span><span style="color:var(--color-danger-ink); font-weight:600">Missing · Fail</span></div>
+          <div style="margin-top: var(--space-4); padding-top: var(--space-4); border-top:1px solid var(--color-ink-100); font-size: var(--text-sm); color: var(--color-ink-500)">
+            Nutrition panel &amp; claims: <strong style="color:var(--color-ink-900)">requires NABL lab report</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="entry-box">
+        <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-2)">What brings you here today?</h2>
+        <p class="muted" style="margin-bottom: var(--space-5)">Pick what fits and we'll take you straight there. Already know exactly what you want? <button type="button" class="link-btn" id="skip-triage-btn">Search directly instead →</button></p>
+
+        <div class="triage-grid" id="triage-grid">
+          <button type="button" class="card triage-option" data-intent="explore">
+            <span class="feature-icon" data-icon="search"></span>
+            <h3>I don't know where to start</h3>
+            <p>Tell us your product and we'll show you exactly what FSSAI requires for it — composition,
+              microbiology, and labelling.</p>
+          </button>
+          <button type="button" class="card triage-option" data-intent="label">
+            <span class="feature-icon" data-icon="tag"></span>
+            <h3>I just want my label checked</h3>
+            <p>Describe your product informally — we'll check it against every label element FSSAI requires
+              for that category.</p>
+          </button>
+          <button type="button" class="card triage-option" data-intent="formulate">
+            <span class="feature-icon" data-icon="layers"></span>
+            <h3>I'm already formulating</h3>
+            <p>Go straight to the Formulation Lab and see how close your recipe is to a compliant one.</p>
+          </button>
+          <button type="button" class="card triage-option" data-intent="other">
+            <span class="feature-icon" data-icon="users"></span>
+            <h3>Something else, or not sure</h3>
+            <p>Skip the guesswork — talk to a person instead of forcing your question into the wrong flow.</p>
+          </button>
+        </div>
+
+        <div class="entry-search-wrap" id="entry-search-wrap" hidden>
+          <p class="entry-search-prompt" id="entry-search-prompt" style="font-size: var(--text-sm); font-weight:600; color: var(--color-ink-700); margin-bottom: var(--space-3)"></p>
+          <form class="entry-search" id="entry-search-form">
+            <input type="search" id="entry-search-input" placeholder="e.g. &quot;buffalo milk&quot;, &quot;cheddar cheese&quot;, or describe your product" />
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+          <div class="entry-or">or</div>
+          <div class="entry-actions">
+            <a class="btn btn-secondary" href="consult.html?kind=doesnt_fit"><span data-icon="compass"></span> Not sure this fits? Talk to us</a>
+            <a class="btn btn-secondary" href="consult.html?kind=license"><span data-icon="certificate"></span> Need a license or registration?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-surface); border-top: var(--border); border-bottom: var(--border);">
+    <div class="container">
+      <div class="section-head" style="max-width: 720px;">
+        <span class="eyebrow">What we are</span>
+        <h2>An FSSAI compliance platform — dairy is our first category, not our whole product</h2>
+        <p>Inspeckt Food Solutions built this so food businesses don't find out about a compliance gap from a
+          regulator, a retailer's quality team, or a failed audit. We're building out coverage across every
+          FSSAI food category; Dairy is live today because it's the one we've fully compiled and signed off —
+          the rest follow the same pattern.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card feature-card">
+          <div class="feature-icon" data-icon="layers"></div>
+          <h3>Formulation checking</h3>
+          <p>Draft and compare formulations against composition standards before you commit to a lab test —
+            the Formulation Lab scores how close each draft is to compliant.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="feature-icon" data-icon="tag"></div>
+          <h3>Label &amp; claims review</h3>
+          <p>Every mandatory label element checked, plus claims validated against real test data once a NABL
+            lab report is uploaded — never against a guessed number.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="feature-icon" data-icon="users"></div>
+          <h3>Expert sign-off</h3>
+          <!-- Fix per your "48 hours needs to be removed": removed the
+               specific-timeframe promise (previously "within 48 hours")
+               rather than reword it, since there's no live sign-off queue
+               behind it yet — matches report.js and consult.html, which
+               got the same fix, so the promise doesn't read differently
+               depending on which page you're on. -->
+          <p>On a paid plan, a consultant reviews and signs off your full report — that queue isn't connected in
+            this build yet, so sign-off happens directly today rather than through an automated turnaround.
+            Anything our engine can't cover — an undefined category, a license application — routes straight to
+            a person today.</p>
+          <!-- Fix per review item C15: see js/ui/report.js for the same credential on the report page itself. -->
+          <p class="muted" style="font-size: var(--text-xs); margin-top: var(--space-2)">Reviewed by Diptasree Chaudhuri, Founder, Inspeckt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From a first draft to a defensible report</h2>
+        <p>No file uploads or OCR to fight with in this version — enter your numbers directly, and Inspeckt
+          does the cross-checking.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>Pick a category</h3>
+          <!-- Fix per review item C6: this used to hardcode "Milk, Paneer,
+               and Cheese fully built" as static markup — a second,
+               separate claim from the one js/ui/landing.js computes from
+               CATEGORIES' own `live` flags, so the two could silently
+               drift apart the next time a category ships. The specific
+               claim now lives in one place (landing.js); this fallback
+               only says what's true with no JS at all. -->
+          <p id="pick-category-note">Choose from the full FSSAI category list — Dairy is live today. Other categories are visible now and launching over time.</p>
+        </div>
+        <div class="step">
+          <h3>Draft &amp; compare formulations</h3>
+          <!-- Fix per review item C3 (residual): this step card still
+               claimed "first 5 iterations are free on any account" —
+               left over from the pre-C3 free-iteration baseline, which
+               C3 removed. The e2e/schema sweep after C3 didn't catch
+               this phrasing because it searched for the old field
+               names/numbers, not this exact sentence. -->
+          <p>Save formulation iterations in the Formulation Lab and see which is closest to compliant — a
+            Regulatory Brief preview is free for every account; saving a scored iteration starts with the
+            Starter plan.</p>
+        </div>
+        <div class="step">
+          <h3>Get a report, or a person</h3>
+          <p>A scored PASS / WARNING / FAIL report with every citation, plus consultant sign-off on a paid plan
+            (that queue isn't live yet in this build) — or an immediate hand-off to a human when something
+            doesn't fit an automated check.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-surface); border-top: var(--border); border-bottom: var(--border);">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What gets checked</span>
+        <h2>Every submission is checked against four testing parameters</h2>
+        <!-- Fix per review item C17 (bring not-live categories live): this
+             fallback used to hardcode "Milk, Paneer and Cheese" — stale
+             the moment a 4th live category (Ghee/Butter) shipped, and the
+             same class of gap C6 already fixed on the two sibling notes
+             above/below this one. js/ui/landing.js overwrites this
+             element's text with the computed liveDairyLabelsText() on
+             load; this is only the no-JS fallback, so it stays generic. -->
+        <p id="what-gets-checked-note">Live today for Dairy; the same structure extends to every FSSAI category as
+          its data is compiled and signed off.</p>
+      </div>
+      <div class="grid-4">
+        <div class="card feature-card">
+          <div class="feature-icon">%</div>
+          <h3>Composition</h3>
+          <p>Fat, SNF, moisture and fat-on-dry-basis against the exact minimums/maximums for your declared
+            product type.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="feature-icon" data-icon="flask"></div>
+          <h3>Testing Parameters</h3>
+          <p>Process-hygiene limits (like plate count, coliform) and food-safety limits (like Salmonella,
+            Listeria) — with the 2/3-class acceptance logic FSSAI actually uses.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="feature-icon" data-icon="tag"></div>
+          <h3>Labelling &amp; claims</h3>
+          <p>Mandatory elements — FSSAI license, allergen box, batch number, dates — plus claims, checked once
+            a real lab report backs them.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="feature-icon" data-icon="thermometer"></div>
+          <h3>Shelf life</h3>
+          <p>A storage-temperature and shelf-life recommendation based on your heat treatment or cheese type.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Category coverage</span>
+        <h2>Every FSSAI category, one platform</h2>
+        <!-- Fix per review item C6: "Dairy is live and fully built" was
+             hardcoded here as static markup, contradicting the accurate,
+             computed count js/ui/landing.js already writes into this same
+             element on load ("3 of 7 dairy sub-categories live so far —
+             Milk, Paneer / Chhana and Cheese"). Overwritten in a browser,
+             but still the literal claim in the page's raw HTML source —
+             for a compliance product built on "never state an unverified
+             number," that's a real gap, not just cosmetic. Fallback below
+             now only says what's true without JS. -->
+        <p id="category-coverage-note">Dairy is live today. Everything else is real — you can see what's coming and ask to be
+          notified — but isn't checkable yet, because its regulatory data hasn't been compiled and signed off.</p>
+      </div>
+      <div class="grid-3" id="category-grid">
+        <!-- populated by js/ui/landing.js -->
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-surface); border-top: var(--border); border-bottom: var(--border);">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Pricing</span>
+        <h2>Starts at ₹15,000 per product, with a done-for-you tier at ₹1,00,000+</h2>
+        <p>A Starter, Mid, and Higher tier scale with how many products or formulation iterations you need
+          checked and how many consultation meetings come with it. License/registration charges are always
+          separate. <a href="pricing.html">See the full pricing breakdown →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why Inspeckt</span>
+        <h2>Built by a food-safety team, not just a form builder</h2>
+      </div>
+      <div class="grid-4">
+        <div class="card feature-card">
+          <h3>Every number is cited</h3>
+          <p>Each check links back to its exact FSSAI clause — e.g. "FSS 2.1.2, Ch 1.2 — Milk Type 1 (Buffalo Milk)" — so you can
+            verify it yourself or hand it to an auditor.</p>
+        </div>
+        <div class="card feature-card">
+          <h3>Three-state results</h3>
+          <p>Not just PASS/FAIL — a WARNING state flags borderline microbiology results that sit between the
+            acceptable and rejection limits, so you catch process drift early.</p>
+        </div>
+        <div class="card feature-card">
+          <h3>We never guess a number</h3>
+          <p>Nutrition panel values and claims are only ever populated from a real, uploaded NABL lab
+            report — never estimated from what you typed in.</p>
+        </div>
+        <div class="card feature-card">
+          <h3>Nothing leaves your browser</h3>
+          <p>This version stores your submissions locally in your browser. No formulation data touches a
+            server unless you choose to run the optional backend.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="cta-band">
+      <h2>Start with your first formulation draft</h2>
+      <p>Free, no formulation data leaves your browser.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="signup.html">Create your account</a>
+        <a class="btn btn-secondary btn-lg" href="login.html">I already have one</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark">In</span> Inspeckt</a>
+        <p class="muted" style="margin-top:var(--space-3)">An FSSAI compliance platform built by
+          Inspeckt Food Solutions, Bengaluru.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#how-it-works">How it works</a>
+        <a href="#categories">Categories</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="consult.html?kind=custom_bundle">Talk to a consultant</a>
+        <a href="login.html">Log in</a>
+        <a href="signup.html">Sign up</a>
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      This tool provides an automated first-pass assessment based on the FSSAI regulations encoded in it. It is
+      not a legal opinion, and Inspeckt is not FSSAI — verify all limits against the current gazetted regulations
+      before making production or labelling decisions.
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/ui/nav.js"></script>
+<script type="module" src="js/ui/landing.js"></script>
+</body>
+</html>

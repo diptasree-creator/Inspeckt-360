@@ -1,0 +1,5 @@
+{
+  "//": "Scopes this directory's .js files to be treated as ES modules by Node's resolver, so the checks/ scripts (and any other Node tooling) can `import` them directly. Has zero effect on the browser (which never reads package.json) and zero effect on build-site-artifact.js (which reads these files as text via fs.readFileSync and strips import/export with a regex, not Node's module loader).",
+  "type": "module",
+  "private": true
+}

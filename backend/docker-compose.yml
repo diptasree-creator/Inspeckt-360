@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: inspeckt_db
+      POSTGRES_USER: inspeckt_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme_local_only}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U inspeckt_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    # Build context is the REPO ROOT (one level up from this file) so the
+    # image can also copy frontend/ — see Dockerfile's own header comment.
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    environment:
+      DATABASE_URL: postgresql://inspeckt_user:${POSTGRES_PASSWORD:-changeme_local_only}@postgres:5432/inspeckt_db
+      JWT_SECRET: ${JWT_SECRET:-dev-only-secret-change-me}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./app:/app/app
+      - ../frontend:/app/frontend
+
+volumes:
+  postgres_data:

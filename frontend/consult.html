@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Talk to a Consultant — Inspeckt</title>
+<meta name="description" content="Get routed to a human FSSAI consultant for products outside our automated checks, license and registration help, or a custom plan." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥛</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topnav">
+  <div class="container topnav-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">In</span> Inspeckt</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#categories">Categories</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="index.html#why">Why Inspeckt</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm" href="login.html">Log in</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Get started</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section" style="padding-top: var(--space-10)">
+    <div class="container" style="max-width: 640px">
+
+      <div id="intake-intro">
+        <span class="eyebrow">Talk to a consultant</span>
+        <h1 id="intake-title">Let's talk to a consultant</h1>
+        <p class="lead" id="intake-subtitle">
+          Tell us a bit about what you need — a consultant will get back to you directly.
+        </p>
+      </div>
+
+      <div id="intake-form-wrap" class="card" style="margin-top: var(--space-6)">
+        <form id="intake-form">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="contactName" type="text" required />
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="contactEmail" type="email" required />
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone <span class="muted">(optional)</span></label>
+            <input id="f-phone" name="contactPhone" type="tel" />
+          </div>
+          <div class="field">
+            <label for="f-company">Business name</label>
+            <input id="f-company" name="companyName" type="text" />
+          </div>
+          <div class="field">
+            <label for="f-message" id="f-message-label">Tell us what you're working on</label>
+            <textarea id="f-message" name="message" rows="4"></textarea>
+          </div>
+          <!-- Fix per review item C8: was "Send to a consultant" — this
+               button only writes to this browser's localStorage
+               (submitLead(), see js/leads.js), it doesn't deliver
+               anything. Someone who submitted and closed the tab, trusting
+               that label, had actually sent nothing. Renamed to not imply
+               delivery; the confirmation screen below now carries the
+               "send" language, on the step that's real. -->
+          <button class="btn btn-primary btn-lg" type="submit" style="width:100%">Continue</button>
+          <!-- Fix per your "48 hours needs to be removed": no fixed
+               response-time promise, since there's no live inbox/queue
+               behind this form yet in this build (see js/leads.js). -->
+          <p class="muted" style="font-size: var(--text-sm); margin-top: var(--space-3); text-align:center;">
+            This is a hand-off to a person, not an automated check — we'll get back to you as soon as we can.
+          </p>
+        </form>
+      </div>
+
+      <div id="intake-confirmation" class="card" style="display:none; margin-top: var(--space-6); text-align:center;">
+        <div style="width:48px;height:48px;margin:0 auto var(--space-4); color: var(--color-success-ink);" data-icon="checkCircle"></div>
+        <!-- Fix per your "Talk to a consultant is still not working"
+             report: this screen used to promise the email app "should
+             have opened" because intake.js used to auto-fire
+             window.location.href on the mailto: URL. That auto-navigation
+             is exactly what's unreliable with no mail client registered,
+             or in a browser that blocks a script-triggered top-level
+             navigation to a non-http(s) scheme — nothing visibly happens,
+             which reads as broken. intake.js no longer auto-fires it; the
+             button below is the one explicit, always-real way to open it. -->
+        <h2 id="confirm-heading">We've got your request</h2>
+        <p class="muted" id="confirm-subtext">Click below to open your email app with everything already filled in — hit send there and it reaches us directly. No email app set up on this device?</p>
+        <div style="display:flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-4);">
+          <a class="btn btn-primary btn-lg" id="confirm-mailto-btn" href="#" style="flex:1; min-width: 200px;">Open my email app</a>
+          <button class="btn btn-secondary btn-lg" type="button" id="confirm-copy-btn" style="flex:1; min-width: 200px;">Copy the message instead</button>
+        </div>
+        <p class="muted" style="margin-top: var(--space-4); font-size: var(--text-sm)">Reference: <code id="confirm-id" style="font-family: var(--font-mono)"></code></p>
+        <a class="btn btn-secondary" href="index.html" style="margin-top: var(--space-3)">Back to homepage</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      Inspeckt is an FSSAI compliance platform, not a legal firm or FSSAI itself — reports and consultations
+      are advisory and are not a substitute for verifying current gazetted regulations.
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/ui/nav.js"></script>
+<script type="module" src="js/ui/intake.js"></script>
+</body>
+</html>

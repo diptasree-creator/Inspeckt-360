@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Terms of Use — Inspeckt</title>
+<meta name="description" content="Inspeckt terms of use — what the automated compliance tool is, and what it isn't." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥛</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topnav">
+  <div class="container topnav-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">In</span> Inspeckt</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#categories">Categories</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="index.html#why">Why Inspeckt</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm" href="login.html">Log in</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Get started</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section" style="padding-top: var(--space-10); padding-bottom: var(--space-10)">
+    <div class="container" style="max-width: 720px">
+      <span class="eyebrow">Terms</span>
+      <h1>Terms of use</h1>
+      <!-- Fix per review item C9: was "Last updated: this build.
+           Plain-language placeholder — have this reviewed by counsel
+           before relying on it." — internal dev-team phrasing ("this
+           build", an instruction to have it reviewed) surfaced verbatim
+           to customers. Same underlying facts (plain-language summary,
+           not yet reviewed by a lawyer), addressed to the reader instead
+           of to whoever was supposed to action the TODO. -->
+      <p class="muted" style="margin-top: var(--space-2)">This is a plain-language summary, not a lawyer-drafted legal document — treat it as informational, and check with your own counsel before relying on it for a business decision.</p>
+
+      <div style="margin-top: var(--space-6)">
+        <h3>What this tool is</h3>
+        <p>Inspeckt is an automated first-pass compliance assessment tool, not a law firm and not FSSAI itself. Reports and Formulation Lab scores reflect the regulatory data encoded in this build at the time you use it — they are not a legal opinion, an FSSAI approval, or a guarantee your product is compliant. Always verify against the current gazetted FSSAI regulations before production, labelling, or sale.</p>
+
+        <h3 style="margin-top: var(--space-5)">Accounts</h3>
+        <p>Sign-in is email-based with no password. In this build, submitting the sign-up or log-in form signs you in immediately — a real deployment would send a one-time link to your email first.</p>
+
+        <h3 style="margin-top: var(--space-5)">Payment</h3>
+        <p>Purchases on the Pricing page in this build are simulated — no card is charged, and no real payment is processed.</p>
+
+        <h3 style="margin-top: var(--space-5)">Liability</h3>
+        <p>Inspeckt Food Solutions is not liable for regulatory, production, or labelling decisions made on the basis of this tool. You are responsible for verifying compliance with a qualified professional before acting on any result.</p>
+
+        <h3 style="margin-top: var(--space-5)">Contact</h3>
+        <p>Questions about these terms: reach us via <a href="consult.html?kind=custom_bundle">Talk to a consultant</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark">In</span> Inspeckt</a>
+        <p class="muted" style="margin-top:var(--space-3)">An FSSAI compliance platform built by Inspeckt Food
+          Solutions, Bengaluru.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html#categories">Categories</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="login.html">Log in</a>
+        <a href="signup.html">Sign up</a>
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      Prices exclude applicable taxes. Reports are an automated first-pass assessment, not a legal opinion or
+      an FSSAI approval — verify all limits against the current gazetted regulations.
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/ui/nav.js"></script>
+</body>
+</html>

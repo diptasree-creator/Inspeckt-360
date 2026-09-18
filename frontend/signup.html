@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Create your account — Inspeckt</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥛</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+<div class="auth-shell">
+  <aside class="auth-side">
+    <a class="brand" href="index.html"><span class="brand-mark">In</span> Inspeckt</a>
+    <div>
+      <p class="quote">"We built the checker we wished existed before our first FSSAI audit."</p>
+      <p class="quote-attr">Inspeckt Food Solutions · Bengaluru</p>
+    </div>
+    <div></div>
+  </aside>
+  <div class="auth-main">
+    <div class="auth-box">
+      <h1>Create your account</h1>
+      <!-- Fix per review item C3: was "...and up to 5 formulation
+           iterations, no payment" — Formulation Lab iterations now draw
+           from the same paid-tier pool as New Submissions, so they're no
+           longer free-to-start. -->
+      <p class="sub">No password to remember — we sign you in with your email. Free to start:
+        a Regulatory Brief for any category, no payment.</p>
+      <!-- Fix per the auth-model review finding: same caveat as
+           login.html, placed here too since a first-time visitor is more
+           likely to land on signup than login. -->
+      <p class="muted" style="font-size: var(--text-sm); margin-top: var(--space-2)">In this build, signing back in later just needs this same email — there's no confirmation step yet, so anyone who knows it can access your account. A future version will send a one-time link instead.</p>
+
+      <div id="form-alert"></div>
+
+      <form id="signup-form">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" type="text" required placeholder="e.g. Priya Sharma" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="company">Business name</label>
+          <input id="company" type="text" required placeholder="Inspeckt Food Solutions" />
+        </div>
+        <div class="field">
+          <label for="license">FSSAI license number <span class="muted" style="font-weight: 400">(optional)</span></label>
+          <input id="license" type="text" placeholder="14-digit license number — add it now or later" inputmode="numeric" maxlength="14" />
+          <span class="hint">Not required to sign up. If you add it, we'll pre-fill manufacturer details on every report.</span>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" autocomplete="email" required placeholder="you@company.com" />
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit" id="signup-submit">Continue with email</button>
+        <button class="btn btn-secondary btn-block btn-lg" type="button" id="google-btn" style="margin-top: var(--space-3)" disabled title="Google sign-in needs OAuth credentials configured — not wired up in this build">
+          Continue with Google <span class="muted" style="font-size: var(--text-xs)">(coming soon)</span>
+        </button>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+      <p class="auth-switch"><a href="index.html">← Back to home</a></p>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/ui/auth-pages.js"></script>
+</body>
+</html>

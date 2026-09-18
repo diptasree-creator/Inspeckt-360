@@ -1,0 +1,92 @@
+/* ==================================================================
+   Inspeckt design tokens
+   A calm, food-safety-grade palette: deep emerald for trust/brand,
+   warm neutrals for text and surfaces, and unambiguous status
+   colours for PASS / WARNING / FAIL. No purple gradients.
+   ================================================================== */
+
+:root {
+  /* ---- Brand ---- */
+  --color-primary-900: #063D2E;
+  --color-primary-700: #0B6E4F;
+  --color-primary-600: #0E8261;
+  --color-primary-500: #129A73;
+  --color-primary-100: #E4F4EC;
+  --color-primary-50:  #F1F9F4;
+
+  /* ---- Neutrals (warm-tinted grey) ---- */
+  --color-ink-900: #14201C;
+  --color-ink-700: #3A4A44;
+  --color-ink-500: #66766F;
+  --color-ink-300: #B9C6C0;
+  --color-ink-200: #D8E1DC;
+  --color-ink-100: #EAF0EC;
+  --color-surface: #FFFFFF;
+  --color-bg: #F6F8F6;
+
+  /* ---- Status ---- */
+  --color-success-ink: #106B3E;
+  --color-success-bg:  #E5F6EC;
+  --color-success-border: #B8E5C7;
+
+  --color-warning-ink: #92500B;
+  --color-warning-bg:  #FEF2E1;
+  --color-warning-border: #F6D89B;
+
+  --color-danger-ink: #A3241F;
+  --color-danger-bg:  #FDEBEA;
+  --color-danger-border: #F3BDB9;
+
+  --color-info-ink: #1D4F8C;
+  --color-info-bg: #EAF2FC;
+  --color-info-border: #BFD9F5;
+
+  /* ---- Typography ----
+     IBM Plex Sans carries headings and body copy — a humanist,
+     slightly technical grotesque that reads as regulatory-grade
+     rather than "generic SaaS". IBM Plex Mono is reserved for the
+     numbers that actually need to line up: fat/SNF percentages,
+     CFU counts, regulation clause codes (e.g. "FSS 2.1.2") — the
+     kind of data a lab report or gazette actually contains. */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
+  --text-4xl: 3.5rem;
+  --leading-tight: 1.2;
+  --leading-normal: 1.55;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* ---- Shape ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 999px;
+
+  /* ---- Elevation ---- */
+  --shadow-xs: 0 1px 2px rgba(20, 32, 28, 0.06);
+  --shadow-sm: 0 2px 8px rgba(20, 32, 28, 0.06), 0 1px 2px rgba(20, 32, 28, 0.04);
+  --shadow-md: 0 8px 24px rgba(20, 32, 28, 0.08), 0 2px 6px rgba(20, 32, 28, 0.04);
+  --shadow-lg: 0 24px 48px rgba(20, 32, 28, 0.14);
+
+  --border: 1px solid var(--color-ink-200);
+  --max-width: 1180px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+}

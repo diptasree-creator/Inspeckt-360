@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — Inspeckt</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥛</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom: var(--space-6); display:flex"><span class="brand-mark">In</span> Inspeckt</a>
+      <nav class="side-nav" aria-label="Dashboard">
+        <button class="side-link" data-route="new"><span class="side-icon" data-icon="plus"></span> New submission</button>
+        <button class="side-link" data-route="lab"><span class="side-icon" data-icon="layers"></span> Formulation Lab</button>
+        <button class="side-link" data-route="history"><span class="side-icon" data-icon="clock"></span> Submission history</button>
+        <button class="side-link" data-route="labelchecks"><span class="side-icon" data-icon="tag"></span> Label checks</button>
+        <button class="side-link" data-route="consults"><span class="side-icon" data-icon="message"></span> Consultant requests</button>
+      </nav>
+    </div>
+    <div class="side-foot">
+      <div class="user-chip">
+        <div class="avatar" id="user-avatar">?</div>
+        <div class="who">
+          <div class="name" id="user-name">—</div>
+          <div class="company" id="user-company">—</div>
+        </div>
+      </div>
+      <button class="btn btn-secondary btn-sm btn-block" id="logout-btn">Log out</button>
+    </div>
+  </aside>
+
+  <div class="main-area" id="main-area">
+    <!-- rendered by js/ui/dashboard.js -->
+  </div>
+</div>
+
+<script type="module" src="js/ui/dashboard.js"></script>
+</body>
+</html>
