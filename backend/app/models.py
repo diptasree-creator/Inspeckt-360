@@ -39,6 +39,55 @@ class User(Base):
 
     submissions = relationship("Submission", back_populates="user", cascade="all, delete-orphan")
     formulation_iterations = relationship("FormulationIteration", back_populates="user", cascade="all, delete-orphan")
+    products = relationship("Product", back_populates="user", cascade="all, delete-orphan")
+
+
+# Valid values for Product.classification_state. Kept as a plain tuple of
+# strings (not a DB-level enum) so a future state can be added with a data
+# migration only, never a schema migration — see WHOLE_APP_SPEC.md §8.
+CLASSIFICATION_STATES = ("CONFIRMED", "NEED_INFORMATION", "CONSULTANT_REVIEW")
+
+
+class Product(Base):
+    """The one shared record a founder's product/submission is supposed to
+    be, per WHOLE_APP_SPEC.md §6: "Do NOT create separate duplicate
+    versions of the product in New Submission / Formulation Lab / Lab
+    Testing / Label Check / Claims Review." Every module should read and
+    write against this row instead of inventing its own.
+
+    This is Phase 1 foundation only (see WHOLE_APP_SPEC.md §50): the table
+    and the link columns exist and are usable, but the New Submission UI
+    doesn't create/attach one yet — that's Phase 2 (the real classification
+    engine) — so `product_id` on Submission/FormulationIteration stays
+    nullable and existing rows are left unlinked rather than guessed at.
+    """
+    __tablename__ = "products"
+
+    id = Column(String, primary_key=True, default=_uuid)
+    user_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    product_name = Column(String, nullable=False)        # e.g. "Mango Flavoured Milk"
+    # The founder's own words — "What is it made from? How is it
+    # processed? What will the customer buy?" (WHOLE_APP_SPEC.md §10).
+    description = Column(String, nullable=True)
+    # Set once a category is at least a candidate; only trustworthy once
+    # classification_state == "CONFIRMED".
+    category = Column(String, nullable=True)
+    sub_type = Column(String, nullable=True)
+    # One of CLASSIFICATION_STATES above. Starts at NEED_INFORMATION — a
+    # brand-new product is never auto-CONFIRMED (WHOLE_APP_SPEC.md §7-8).
+    classification_state = Column(String, nullable=False, default="NEED_INFORMATION")
+    # Candidate standards considered, the distinguishing question(s) asked
+    # and answered, and why the current state was reached — the "concise
+    # reason" / "classification evidence" WHOLE_APP_SPEC.md §6 and §8 call
+    # for, kept structured so the founder layer and the consultant/technical
+    # layer can both be rendered from the same data instead of two copies.
+    classification_evidence_json = Column(JSON, nullable=True)
+    created_at = Column(DateTime, default=_now)
+    updated_at = Column(DateTime, default=_now, onupdate=_now)
+
+    user = relationship("User", back_populates="products")
+    submissions = relationship("Submission", back_populates="product")
+    formulation_iterations = relationship("FormulationIteration", back_populates="product")
 
 
 class Submission(Base):
@@ -46,6 +95,11 @@ class Submission(Base):
 
     id = Column(String, primary_key=True, default=_uuid)
     user_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    # Nullable / additive (Phase 1 foundation — see Product's docstring
+    # above): links this submission to the one shared product record when
+    # the caller provides one. Existing rows predate this column and stay
+    # unlinked rather than being guessed into a product after the fact.
+    product_id = Column(String, ForeignKey("products.id", ondelete="SET NULL"), nullable=True, index=True)
     category = Column(String, nullable=False)          # "milk" | "paneer" | "cheese"
     input_json = Column(JSON, nullable=False)           # raw form input, as submitted
     result_json = Column(JSON, nullable=False)          # full validate_submission() output
@@ -61,6 +115,7 @@ class Submission(Base):
     created_at = Column(DateTime, default=_now)
 
     user = relationship("User", back_populates="submissions")
+    product = relationship("Product", back_populates="submissions")
 
 
 class FormulationIteration(Base):
@@ -71,6 +126,8 @@ class FormulationIteration(Base):
 
     id = Column(String, primary_key=True, default=_uuid)
     user_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    # Nullable / additive — see Submission.product_id above.
+    product_id = Column(String, ForeignKey("products.id", ondelete="SET NULL"), nullable=True, index=True)
     product_name = Column(String, nullable=False)       # e.g. "Fruit Yogurt"
     iteration_label = Column(String, nullable=False)     # e.g. "v1", "Less sugar"
     category = Column(String, nullable=False)
@@ -80,6 +137,7 @@ class FormulationIteration(Base):
     created_at = Column(DateTime, default=_now)
 
     user = relationship("User", back_populates="formulation_iterations")
+    product = relationship("Product", back_populates="formulation_iterations")
 
 
 class MagicLinkToken(Base):
