@@ -90,12 +90,64 @@ class PlatformCategoryOut(BaseModel):
     live: bool
 
 
+# ---- Products (the shared product/submission record — WHOLE_APP_SPEC.md
+# §6: one record every module attaches to, instead of each module
+# inventing its own). Phase 1 foundation: create/read/list/update only —
+# nothing yet auto-creates one from New Submission or Formulation Lab
+# (that's Phase 2, the real classification engine).
+class ProductCreateRequest(BaseModel):
+    product_name: str
+    description: Optional[str] = None
+
+
+class ProductUpdateRequest(BaseModel):
+    """Every field optional: a caller sends only what it's changing.
+    Used by the (future, Phase 2) classification engine to move a product
+    through CONFIRMED / NEED_INFORMATION / CONSULTANT_REVIEW as evidence
+    comes in — see app/models.py's CLASSIFICATION_STATES."""
+    product_name: Optional[str] = None
+    description: Optional[str] = None
+    category: Optional[str] = None
+    sub_type: Optional[str] = None
+    classification_state: Optional[str] = None
+    classification_evidence: Optional[Dict[str, Any]] = None
+
+    @field_validator("classification_state")
+    @classmethod
+    def _validate_state(cls, v):
+        if v is None:
+            return None
+        allowed = {"CONFIRMED", "NEED_INFORMATION", "CONSULTANT_REVIEW"}
+        if v not in allowed:
+            raise ValueError(f"classification_state must be one of {sorted(allowed)}")
+        return v
+
+
+class ProductOut(BaseModel):
+    id: str
+    product_name: str
+    description: Optional[str] = None
+    category: Optional[str] = None
+    sub_type: Optional[str] = None
+    classification_state: str
+    classification_evidence: Optional[Dict[str, Any]] = None
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
 # ---- Formulation Lab ----
 class FormulationIterationCreateRequest(BaseModel):
     product_name: str
     iteration_label: str
     category: str
     input: Dict[str, Any]
+    # Optional: links this iteration to the shared product record (see
+    # Product above) when the caller has one. Omitted, behaviour is exactly
+    # what it was before this field existed.
+    product_id: Optional[str] = None
 
 
 class FormulationIterationOut(BaseModel):
@@ -107,6 +159,7 @@ class FormulationIterationOut(BaseModel):
     closeness_score: str
     gap_summary: List[Dict[str, Any]]
     created_at: datetime
+    product_id: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -167,6 +220,10 @@ class SubmissionCreateRequest(BaseModel):
     # label, never what it was). Optional — not every FBO has assigned one
     # yet at draft time.
     batch_lot_number: Optional[str] = None
+    # Optional: links this submission to the shared product record (see
+    # ProductOut above) when the caller has one. Omitted, behaviour is
+    # exactly what it was before this field existed.
+    product_id: Optional[str] = None
 
 
 class SubmissionOut(BaseModel):
@@ -177,6 +234,7 @@ class SubmissionOut(BaseModel):
     input: Dict[str, Any]
     result: Dict[str, Any]
     batch_lot_number: Optional[str] = None
+    product_id: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -188,3 +246,4 @@ class SubmissionSummaryOut(BaseModel):
     overall_status: str
     created_at: datetime
     batch_lot_number: Optional[str] = None
+    product_id: Optional[str] = None
