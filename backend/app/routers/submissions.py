@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.dairy_bible import CATEGORIES
 from app.database import get_db
 from app.deps import get_current_user
-from app.models import Submission, User
+from app.models import Product, Submission, User
 from app.schemas import SubmissionCreateRequest, SubmissionOut, SubmissionSummaryOut
 from app.usage_pool import pool_allowance, pool_used
 from app.validation_engine import validate_submission
@@ -24,6 +24,15 @@ def create_submission(
 ):
     if payload.category not in _LIVE_CATEGORY_IDS:
         raise HTTPException(status_code=400, detail=f"'{payload.category}' is not a live category yet.")
+
+    # Phase 1 foundation (WHOLE_APP_SPEC.md §6): if the caller passes a
+    # product_id, it must be one of this user's own products — never
+    # silently ignored, and never allowed to attach to someone else's
+    # record.
+    if payload.product_id is not None:
+        product = db.get(Product, payload.product_id)
+        if product is None or product.user_id != current_user.id:
+            raise HTTPException(status_code=404, detail="Product not found")
 
     # Fix per review item C3: New Submissions now draw from the same
     # shared pool as Formulation Lab iterations (app/usage_pool.py)
@@ -45,6 +54,7 @@ def create_submission(
 
     record = Submission(
         user_id=current_user.id,
+        product_id=payload.product_id,
         category=payload.category,
         input_json=payload.input,
         result_json=result,
@@ -60,7 +70,7 @@ def create_submission(
     return SubmissionOut(
         id=record.id, category=record.category, overall_status=record.overall_status,
         created_at=record.created_at, input=record.input_json, result=record.result_json,
-        batch_lot_number=record.batch_lot_number,
+        batch_lot_number=record.batch_lot_number, product_id=record.product_id,
     )
 
 
@@ -75,7 +85,7 @@ def list_submissions(db: Session = Depends(get_db), current_user: User = Depends
     return [
         SubmissionSummaryOut(
             id=r.id, category=r.category, overall_status=r.overall_status, created_at=r.created_at,
-            batch_lot_number=r.batch_lot_number,
+            batch_lot_number=r.batch_lot_number, product_id=r.product_id,
         )
         for r in rows
     ]
@@ -89,5 +99,6 @@ def get_submission(submission_id: str, db: Session = Depends(get_db), current_us
     return SubmissionOut(
         id=record.id, category=record.category, overall_status=record.overall_status,
         created_at=record.created_at, input=record.input_json, result=record.result_json,
-        batch_lot_number=record.batch_lot_number,
+        batch_lot_number=record.batch_lot_number, product_id=record.product_id,
     )
+
